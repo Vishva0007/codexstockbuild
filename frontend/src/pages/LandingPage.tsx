@@ -49,7 +49,7 @@ export function LandingPage() {
             Research markets with confidence, not noise.
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-muted-foreground">
-            SurfThroughStocks is laying the groundwork for a focused, intelligent investing research
+            {BRAND.name} is laying the groundwork for a focused, intelligent investing research
             experience.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
