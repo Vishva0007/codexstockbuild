@@ -5,6 +5,7 @@ import { Brand } from "@/components/common/Brand";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { BRAND } from "@/constants/branding";
 
 const pillars = [
   {
