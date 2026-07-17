@@ -2,6 +2,7 @@ import type {
   Company,
   Quote,
   StockSearchResult,
+  HistoricalPrice,
 } from "../types/stock";
 
 const API_BASE = "http://127.0.0.1:8000";
@@ -32,6 +33,16 @@ export const marketApi = {
   company(symbol: string) {
     return request<Company>(
       `/market/company/${symbol}`
+    );
+  },
+
+  history(
+    symbol: string,
+    interval = "1d",
+    period = "6mo"
+  ) {
+    return request<HistoricalPrice[]>(
+      `/market/history/${symbol}?interval=${interval}&period=${period}`
     );
   },
 };
