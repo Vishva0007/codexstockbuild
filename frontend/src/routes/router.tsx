@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import { StockDetailsPage } from "@/pages/StockDetailsPage";
 
 import { AppLayout } from "@/layouts/AppLayout";
 import { AuthLayout } from "@/layouts/AuthLayout";
@@ -18,6 +19,9 @@ export const router = createBrowserRouter([
   },
   {
     element: <AppLayout />,
-    children: [{ path: "/dashboard", element: <DashboardPage /> }],
+    children: [{ path: "/dashboard", element: <DashboardPage /> },
+               { path: "/stocks/:symbol", element: <StockDetailsPage />,
+
+               },],
   },
 ]);

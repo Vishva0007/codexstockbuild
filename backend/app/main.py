@@ -29,3 +29,11 @@ app.add_middleware(
 
 register_exception_handlers(app)
 app.include_router(api_router, prefix=settings.api_v1_prefix)
+from fastapi.routing import APIRoute
+
+print("\n========== APP ROUTES ==========")
+
+for route in app.routes:
+    print(type(route), route)
+
+print("================================\n")
