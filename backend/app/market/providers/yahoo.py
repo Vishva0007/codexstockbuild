@@ -1,9 +1,8 @@
-from .base import MarketProvider
+import requests
 from typing import Any
 
 import yfinance as yf
-
-from app.market.providers.base import MarketProvider
+from .base import MarketProvider
 
 
 class YahooMarketProvider(MarketProvider):
@@ -12,15 +11,42 @@ class YahooMarketProvider(MarketProvider):
     """
 
     async def search(self, query: str) -> list[dict[str, Any]]:
-        # yfinance doesn't provide a free search API.
-        # We'll implement search later using another provider.
-        return [
-            {
-                "symbol": "RELIANCE.NS",
-                "name": "Reliance Industries Ltd",
-                "exchange": "NSE",
-            }
-        ]
+        url = "https://query1.finance.yahoo.com/v1/finance/search"
+
+        response = requests.get(
+            url,
+            params={
+                "q": query,
+                "quotesCount": 10,
+                "newsCount": 0,
+            },
+            headers={
+                "User-Agent": "Mozilla/5.0"
+            },
+            timeout=10,
+        )
+
+        print(response.status_code)
+        print(response.text)
+
+        data = response.json()
+        results: list[dict[str, Any]] = []
+
+        for item in data.get("quotes", []):
+            symbol = item.get("symbol")
+
+            if not symbol:
+                continue
+
+            results.append(
+                {
+                    "symbol": symbol,
+                    "name": item.get("shortname") or item.get("longname") or symbol,
+                    "exchange": item.get("exchange", ""),
+                }
+            )
+
+        return results
 
     async def get_quote(self, symbol: str) -> dict[str, Any]:
         ticker = yf.Ticker(symbol)
