@@ -13,41 +13,28 @@ export function StockSearch({ onSelect }: Props) {
   return (
     <div style={{ marginBottom: 24 }}>
       <input
-        type="text"
-        placeholder="Search stock..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        style={{
-          width: "100%",
-          padding: "10px",
-          fontSize: "16px",
-          color: "#111",
-        }}
-      />
+  type="text"
+  placeholder="Search stock..."
+  value={query}
+  onChange={(e) => setQuery(e.target.value)}
+  className="w-full rounded-md border border-border bg-background px-3 py-2 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+/>
 
       {isLoading && <p>Searching...</p>}
 
-      {data && data.length > 0 && (
+      {query.length > 1 && data && data.length > 0 && (
         <div
-          style={{
-            border: "1px solid #ddd",
-            marginTop: 8,
-            borderRadius: 6,
-          }}
-        >
+  className="mt-2 rounded-md border border-border bg-background shadow-lg"
+>
           {data.map((stock) => (
             <div
-              key={stock.symbol}
-              onClick={() => {
-                onSelect(stock.symbol);
-                setQuery("");
-              }}
-              style={{
-                padding: "10px",
-                cursor: "pointer",
-                borderBottom: "1px solid #eee",
-              }}
-            >
+  key={stock.symbol}
+  onClick={() => {
+    onSelect(stock.symbol);
+    setQuery("");
+  }}
+  className="cursor-pointer border-b border-border px-3 py-2 text-foreground hover:bg-muted"
+>
               <strong>{stock.symbol}</strong> — {stock.name}
             </div>
           ))}
