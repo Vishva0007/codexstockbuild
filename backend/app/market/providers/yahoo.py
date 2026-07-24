@@ -54,10 +54,33 @@ class YahooMarketProvider(MarketProvider):
 
         return {
             "symbol": symbol,
+
             "price": info.get("currentPrice"),
             "change": info.get("regularMarketChange"),
             "changePercent": info.get("regularMarketChangePercent"),
-        }
+
+        "open": info.get("open"),
+        "previousClose": info.get("previousClose"),
+
+        "dayHigh": info.get("dayHigh"),
+        "dayLow": info.get("dayLow"),
+
+        "fiftyTwoWeekHigh": info.get("fiftyTwoWeekHigh"),
+        "fiftyTwoWeekLow": info.get("fiftyTwoWeekLow"),
+
+        "volume": info.get("volume"),
+        "averageVolume": info.get("averageVolume"),
+
+        "marketCap": info.get("marketCap"),
+
+        "trailingPE": info.get("trailingPE"),
+        "forwardPE": info.get("forwardPE"),
+
+        "dividendYield": info.get("dividendYield"),
+
+        "currency": info.get("currency"),
+        "exchange": info.get("exchange"),
+    }
 
     async def get_company(self, symbol: str) -> dict[str, Any]:
         ticker = yf.Ticker(symbol)
